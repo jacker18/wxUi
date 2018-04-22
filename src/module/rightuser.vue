@@ -30,7 +30,6 @@
   export default {
     name: "rightuser",
     methods: {
-
     ...mapMutations(['CHAT', 'ACTIVE']),
       sendMsg: function (item) {
         this.$store.commit('ACTIVE', 0);

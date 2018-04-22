@@ -4,6 +4,10 @@ const utils = require('./utils')//实用工具
 const config = require('../config')
 const vueLoaderConfig = require('./vue-loader.conf')
 const webpack=require("webpack");
+// const happyPack=require('happypack');
+// const os=require('os');
+// const happyThreadPool = happyPack.ThreadPool({ size: os.cpus().length });
+
 function resolve (dir) {
   return path.join(__dirname, '..', dir)
 }
@@ -25,7 +29,7 @@ module.exports = {//__dirname制定当前执行脚本的路径
     alias: {//用来配置依赖文件的匹配，如依赖文件的别名配置、模块的查找目录、默认查找的
       'vue$': 'vue/dist/vue.esm.js',
       '@': resolve('src'),
-        "jquery": path.resolve(__dirname, '../node_modules/jquery/src/jquery')
+        "jquery": path.resolve(__dirname, '../static/js/jquery.min.js')
     }
   },
   module: {//匹配规则

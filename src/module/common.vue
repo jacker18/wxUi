@@ -32,15 +32,14 @@
       ...mapMutations(['ACTIVE']),
       changeActive(item, index) {
         var self = this;
-        for (var i = 0; i < this.optionsList.length; i++) {
+        for (let i = 0; i < this.optionsList.length; i++) {
           this.optionsList[i].active = false;
+
           if (i == this.optionsList.length - 1) {
             item.active = true;
             this.$store.commit("ACTIVE", index)
           }
         }
-
-
       },taboption:function(item){
         this.$emit("update:Option",item.option)
       }

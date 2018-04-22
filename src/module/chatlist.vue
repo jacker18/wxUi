@@ -162,7 +162,6 @@
           windowH:function(newV,oldV){
             var H=newV;
             $('#mainer').height(H+"px");
-            // chatScroll.refresh();
           }
       },computed:{...mapState(['windowH'])},mounted:function(){
             setTimeout(function () {
@@ -173,13 +172,11 @@
                 });
                 document.addEventListener('touchmove', function (e) {
                     e.preventDefault();
-
                 }, ispass.isPassive() ? {
                     capture: false,
                     passive: false
                 } : false);
             }, 500);
-
         },methods:{
         ...mapMutations(['CHAT']),
           chatChange:function(item){

@@ -17,7 +17,6 @@ function changeScreen(dom,type){
       //Chrome等
       else if (docElm.webkitRequestFullScreen) {
         docElm.webkitRequestFullScreen();
-
       }
       //IE11
       else if (elem.msRequestFullscreen) {

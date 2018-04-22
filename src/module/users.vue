@@ -53,7 +53,6 @@ var listScroll={};
     export default {
         name: "users",methods: {
             handleOpen(key, keyPath) {
-                console.log(key, keyPath);
                var Active=''+key+"-1";
                this.changeActive=key;
                console.log(Active,"88282");

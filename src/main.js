@@ -26,7 +26,7 @@ if('addEventListener' in document){
     },false)
 }
 // require('./mockjs.js')
-console.log(vuex,"99999")
+
 
 /* eslint-disable no-new */
 new Vue({
@@ -36,7 +36,7 @@ new Vue({
     // template: '<App/>',
     render:h=>h(App)
 })
-
+// console.log(Vue,"jjsjsj")
 Vue.filter('getYMD', function(input) {
     return input.split(' ')[0];
 })

@@ -66,8 +66,6 @@
         computed: {
             ...mapState(['activeIndex','file'])
         }, mounted: function () {
-
-
         },
         components: {
              users,

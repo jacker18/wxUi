@@ -14,28 +14,31 @@
       <el-row>
         <el-col :span="24">
           <div class="message-option">
-            <i class="icon iconfont icon-smile"></i><i class="icon iconfont icon-wenjian1"></i><i
-            class="icon iconfont icon-jianqie"></i><i class="icon iconfont icon-liaotian"></i>
-            <i class="icon iconfont icon-18"></i><i class="icon iconfont icon-weibiaoti-"></i>
+            <div><i class="icon iconfont icon-smile" id="icon-smile"></i></div>
+           <el-upload :on-success="uploadPic"  action="../assets/save/"  :file-list="fileList"> <i class="icon iconfont icon-wenjian1"></i></el-upload>
+            <i class="icon iconfont icon-jianqie"></i>
+            <i class="icon iconfont icon-liaotian"></i>
+            <i class="icon iconfont icon-18"></i>
+            <i class="icon iconfont icon-weibiaoti-"></i>
           </div>
           <textarea @keydown.enter.prevent.stop="sendMsg($event)" id="chat_input" v-model="publish"></textarea></el-col>
       </el-row>
     </el-footer>
   </div>
 </template>
-
 <script>
   import Img from '../assets/img/timg.jpg'
   import iscroll from "iscroll"
   import * as ispass from "../assets/js/jjs/libjs/ispassive"
   import '../assets/font/iconfont.css'
   import {mapState} from 'vuex';
-import showDate from '../assets/js/jjs/libjs/date'
+  import showDate from '../assets/js/jjs/libjs/date';
   export default {
     name: "main-info",
     data() {
       return {
         chat_title: "吉吉",
+        fileList:[],
         chat_info: [{
           time: "20:20:20",
           icon: Img,
@@ -122,16 +125,19 @@ import showDate from '../assets/js/jjs/libjs/date'
       }
     }, watch: {
       toChater: function (newV, oldV) {
-        console.log(newV,"jsjjsjs")
+        console.log(newV, "jsjjsjs")
         this.chat_title = newV;
-        this.chat_info=[];
-      },windowH:function(newV,oldV){
-        var H=newV;
-        $('#chat-info-body').height(H-200-45+"px");
+        this.chat_info = [];
+      }, windowH: function (newV, oldV) {
+        var H = newV;
+        $('#chat-info-body').height(H - 200 - 45 + "px");
       }
     }, computed: {
-      ...mapState(['toChater','windowH'])
+      ...mapState(['toChater', 'windowH'])
     }, methods: {
+      uploadPic(response, file, fileList){
+        console.log(response,file,fileList,"jhjsjsllkkk")
+      },
       sendMsg: function ($event) {
         if (this.publish.length == 0) {
           $.msg("不能为空");
@@ -144,18 +150,16 @@ import showDate from '../assets/js/jjs/libjs/date'
           }
           this.chat_info.push(item);
           this.publish = "";
-          var self=this;
-          this.$nextTick(function(){
-
+          var self = this;
+          this.$nextTick(function () {
             self.mainscroll.refresh();
-            self.mainscroll.scrollTo( self.mainscroll.maxScrollX,self.mainscroll.maxScrollY)
+            self.mainscroll.scrollTo(self.mainscroll.maxScrollX, self.mainscroll.maxScrollY)
           })
-
         }
       }
     }, mounted: function () {
-      var self = this;
-      var count = 0;
+         let self = this;
+         let count = 0;
       setTimeout(function () {
         self.mainscroll = new iscroll("#chat-info-body", {
           scrollX: false,
@@ -170,12 +174,18 @@ import showDate from '../assets/js/jjs/libjs/date'
           passive: false
         } : false);
       }, 1000)
-
+      $.fn.extend(window.jq.fn);
+      $("#icon-smile").qqFace({
+        id:'facebox',
+        assign:'chat_input', //给输入框赋值
+        path:'../../static/arclist/'    //表情图片存放的路径
+      })
     }
   }
 </script>
 
 <style lang="scss" scoped>
+
   #chat-info-body {
     position: relative;
     /*height: 600px;*/
@@ -301,7 +311,8 @@ import showDate from '../assets/js/jjs/libjs/date'
     left: 0;
     text-align: center;
     width: 100%;
-    overflow: hidden;
+    /*overflow: hidden;*/
+    clear:both;
     border-top: 1px solid #dddddd;
     background: #ffffff;
     .el-row {
@@ -340,9 +351,22 @@ import showDate from '../assets/js/jjs/libjs/date'
 
   .message-option {
     width: 100%;
-    overflow: hidden;
-  }
+    /*overflow: hidden;*/
+    position: relative;
+    display: flex;
+    justify-content: flex-start;
 
+  }
+  .message-option>div{
+    display: block;
+    width: 35px;
+    height: 35px;
+    line-height: 35px;
+    margin-left: 10px;
+    font-size: 24px;
+    float: left;
+    color: #000;position:relative;background: #ffffff;}
+  .message-option .qqFace{background: #ffffff;}
   .message-option i {
     display: block;
     width: 35px;
@@ -353,7 +377,7 @@ import showDate from '../assets/js/jjs/libjs/date'
     float: left;
     color: #000;
   }
-
+  .message-option div i{margin-left:0;}
   .message-option .icon-18, .message-option .icon-weibiaoti- {
     float: right;
   }
@@ -366,6 +390,6 @@ import showDate from '../assets/js/jjs/libjs/date'
     outline: none;
     resize: none;
     background: #dddddd;
-    border-radius:5px;
+    border-radius: 5px;
   }
 </style>
